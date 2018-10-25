@@ -12,6 +12,7 @@ public class LemmatizerNode extends OtpNode {
     private static final String LEMMATIZE_DISPATCH = "lemmatize";
     private static final String NODE_NAME = "lemport";
     private static final String NODE_MAILBOX = NODE_NAME + "-mailbox";
+    private static final String SECRET_COOKIE = "nodiff";
 
     private OtpErlangPid _lastPid;
     private final Lemmatizer _lemmatizer;
@@ -42,6 +43,7 @@ public class LemmatizerNode extends OtpNode {
 
     public LemmatizerNode(String node) throws ParserConfigurationException, WordRankingLoadException, SAXException, DictionaryLoadException, IOException {
         super(node);
+        setCookie(SECRET_COOKIE);
         _otpMbox = createMbox(NODE_MAILBOX);
         _lemmatizer = new Lemmatizer();
     }
@@ -60,6 +62,7 @@ public class LemmatizerNode extends OtpNode {
                     final String tokenString = new String(token.binaryValue());
                     final String tagString = new String(tag.binaryValue());
                     final String lemma = _lemmatizer.lemmatize(tokenString, tagString);
+                    System.out.println(new StringBuilder().append("Lemma(").append(tagString).append(") ").append(tokenString).append(" = ").append(lemma).toString());
 
                     _otpMbox.send(_lastPid, new OtpErlangString(lemma));
                     break;
