@@ -189,7 +189,7 @@ public class Lemmatizer {
     System.out.println(properties.getProperty("adverbDeclensions"));
 
     InputStream adverbDeclensionInput =
-        this.getClass().getClassLoader().getResourceAsStream(
+        this.getClass().getResourceAsStream(
             properties.getProperty("adverbDeclensions"));
     InputStream augmentativeDeclensionInput =
         this.getClass().getResourceAsStream(
