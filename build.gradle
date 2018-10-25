@@ -1,0 +1,25 @@
+group 'LemPORT'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'org.erlang.otp:jinterface:1.6.1'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "otpapi.LemmatizerNode"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
