@@ -64,7 +64,7 @@ public class LemmatizerNode extends OtpNode {
                     final String lemma = _lemmatizer.lemmatize(tokenString, tagString);
                     System.out.println(new StringBuilder().append("Lemma(").append(tagString).append(") ").append(tokenString).append(" = ").append(lemma).toString());
 
-                    _otpMbox.send(_lastPid, new OtpErlangString(lemma));
+                    _otpMbox.send(_lastPid, createLemmaResultTuple(createLemmaResultsArray(tokenString, tagString, lemma)));
                     break;
                 default:
                     break;
@@ -73,5 +73,17 @@ public class LemmatizerNode extends OtpNode {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private OtpErlangList createLemmaResultTuple(OtpErlangObject[] lemmatizeResults) {
+        return new OtpErlangList(lemmatizeResults);
+    }
+
+    private OtpErlangObject[] createLemmaResultsArray(String tokenString, String tagString, String lemma) {
+        return new OtpErlangObject[] {
+                new OtpErlangString(lemma),
+                new OtpErlangString(tokenString),
+                new OtpErlangString(tagString)
+        };
     }
 }
