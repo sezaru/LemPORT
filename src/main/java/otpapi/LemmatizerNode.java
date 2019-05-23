@@ -43,6 +43,7 @@ public class LemmatizerNode extends OtpNode {
 
     public LemmatizerNode(String node) throws ParserConfigurationException, WordRankingLoadException, SAXException, DictionaryLoadException, IOException {
         super(node);
+        System.out.println("Node: " + node);
         setCookie(SECRET_COOKIE);
         _otpMbox = createMbox(NODE_MAILBOX);
         _lemmatizer = new Lemmatizer();
@@ -50,10 +51,15 @@ public class LemmatizerNode extends OtpNode {
 
     public final void performOneMessage() {
         try {
+            System.out.println("Ready!");
             final OtpErlangTuple tuple = (OtpErlangTuple) _otpMbox.receive();
+
+            System.out.println("Received new message");
 
             _lastPid = (OtpErlangPid) tuple.elementAt(0);
             final OtpErlangAtom dispatchName = (OtpErlangAtom) tuple.elementAt(1);
+
+            System.out.println("Type: " + dispatchName.toString());
 
             switch (dispatchName.toString()) {
                 case LEMMATIZE_DISPATCH:
