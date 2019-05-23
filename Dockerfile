@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER r3dlex <andrebemfs@gmail.com>
+MAINTAINER sezaru <sezdocs@live.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y elixir erlang
 EXPOSE 4369
 
 #Checkouts LemPORT
-RUN git clone https://git@github.com/r3dlex/LemPORT.git /lemport
+RUN git clone https://git@github.com/sezaru/LemPORT.git /lemport
 
 WORKDIR /lemport
 
