@@ -22,7 +22,7 @@ public class LemmatizerNode extends OtpNode {
         final LemmatizerNode lemmatizerNode;
 
         try {
-            lemmatizerNode = new LemmatizerNode(LemmatizerNode.NODE_NAME + "@" + "127.0.0.1");
+            lemmatizerNode = new LemmatizerNode(LemmatizerNode.NODE_NAME + "@" + "127.0.0.1", 9000);
 
             while (true) {
                 lemmatizerNode.performOneMessage();
@@ -41,10 +41,10 @@ public class LemmatizerNode extends OtpNode {
     }
 
 
-    public LemmatizerNode(String node) throws ParserConfigurationException, WordRankingLoadException, SAXException, DictionaryLoadException, IOException {
-        super(node);
+    public LemmatizerNode(String node, int port) throws ParserConfigurationException, WordRankingLoadException, SAXException, DictionaryLoadException, IOException {
+        super(node, SECRET_COOKIE, port);
         System.out.println("Node: " + node);
-        setCookie(SECRET_COOKIE);
+
         _otpMbox = createMbox(NODE_MAILBOX);
         _lemmatizer = new Lemmatizer();
     }
