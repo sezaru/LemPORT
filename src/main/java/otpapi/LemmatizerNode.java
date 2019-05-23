@@ -22,7 +22,7 @@ public class LemmatizerNode extends OtpNode {
         final LemmatizerNode lemmatizerNode;
 
         try {
-            lemmatizerNode = new LemmatizerNode(LemmatizerNode.NODE_NAME);
+            lemmatizerNode = new LemmatizerNode(LemmatizerNode.NODE_NAME + "@" + "127.0.0.1");
 
             while (true) {
                 lemmatizerNode.performOneMessage();
